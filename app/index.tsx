@@ -1,5 +1,9 @@
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, View , ScrollView, Image, Dimensions} from "react-native";
+import React from 'react';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, ScrollView, Image, Dimensions } from "react-native";
 import { Input } from "../components/Input";
+import { Button } from "../components/Button";  
+import { Link } from 'expo-router';
+import Signup from './signup';
 
 const { height: screenHeight } = Dimensions.get('window');
 
@@ -9,12 +13,23 @@ export default function Index() {
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentCenter}>
       <View style={styles.imageContainer}>
         <Image
-          source={require('../assets/telas/imagem2.png')}
+          source={require('../assets/telas/imagem1.png')}
           style={styles.illustration}
         />
-        <Input />
+        
         <Text style={styles.title}>Entrar</Text>
         <Text style={styles.subtitle}>Acesse sua conta com e-mail e senha.</Text>
+        <View style={styles.form}>
+          <Input placeholder="Digite seu e-mail"/>
+          <Input placeholder="Digite sua senha" secureTextEntry={true} />
+          <Button label="Entrar" />
+        </View>
+        <Text style={styles.footerText}>
+          Não tem uma conta?
+          <Link href="/signup" style={styles.footerLink}>
+            Cadastre-se aqui
+          </Link>
+        </Text>
       </View>
     </ScrollView> 
     </KeyboardAvoidingView>
@@ -57,4 +72,17 @@ const styles = StyleSheet.create({
     marginTop: 2,
     marginBottom: 20,
   },
+  form: {
+    marginTop: 24,
+    gap: 12,
+  },
+  footerText: {
+    textAlign: 'center',
+    marginTop: 24,
+    color: '#585860',
+  },
+  footerLink: {
+    color: '#032ad7',
+    fontWeight: '700',
+  }
 });
