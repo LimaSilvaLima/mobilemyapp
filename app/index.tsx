@@ -3,7 +3,6 @@ import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, ScrollView, Ima
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";  
 import { Link } from 'expo-router';
-import Signup from './signup';
 
 const { height: screenHeight } = Dimensions.get('window');
 

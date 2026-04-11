@@ -3,31 +3,35 @@ import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, ScrollView, Ima
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";  
 import { Link } from 'expo-router';
-import Signup from './signup';
 
 const { height: screenHeight } = Dimensions.get('window');
 
-export default function signup() {
+export default function signUp() {
   return (
     <KeyboardAvoidingView style={styles.screenContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentCenter}>
+      <ScrollView style={styles.scrollView} 
+        contentContainerStyle={styles.contentCenter}
+        showsVerticalScrollIndicator={false}  
+      >
       <View style={styles.imageContainer}>
         <Image
           source={require('../assets/telas/imagem2.png')}
           style={styles.illustration}
         />
         
-        <Text style={styles.title}>Entrar</Text>
-        <Text style={styles.subtitle}>Acesse sua conta com e-mail e senha.</Text>
+        <Text style={styles.title}>Cadastre-se</Text>
+        <Text style={styles.subtitle}>Crie sua conta para começar.</Text>
         <View style={styles.form}>
+          <Input placeholder="Nome:"/>
           <Input placeholder="Digite seu e-mail"/>
           <Input placeholder="Digite sua senha" secureTextEntry={true} />
-          <Button label="Entrar" />
+          <Input placeholder="Confirmar senha" secureTextEntry={true} />
+          <Button label="Criar Conta" />
         </View>
         <Text style={styles.footerText}>
-          Não tem uma conta?
-          <Link href="/signup" style={styles.footerLink}>
-            Cadastre-se aqui
+          Já possui uma conta?
+          <Link href="/" style={styles.footerLink}>
+            Voltar para o login
           </Link>
         </Text>
       </View>
@@ -86,4 +90,3 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   }
 });
-

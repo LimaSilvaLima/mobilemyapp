@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   },
 });
 
+
 export function Input({...rest}: TextInputProps) {
   return (
     <TextInput
