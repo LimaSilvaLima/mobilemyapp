@@ -1,15 +1,27 @@
 import React from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, ScrollView, Image, Dimensions } from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, Alert, ScrollView, Image, Dimensions } from "react-native";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";  
 import { Link } from 'expo-router';
+import { useState } from 'react';
 
 const { height: screenHeight } = Dimensions.get('window');
 
 export default function Index() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleSignIn(){
+    if(!email.trim() || !password.trim()){
+     return Alert.alert("Entrar", "Preencha todos os campos")
+    }
+    Alert.alert("Bem vindo", `Você está logado com ${email}`)
+    
+  }
   return (
     <KeyboardAvoidingView style={styles.screenContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentCenter}>
+      <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentCenter}
+      >
       <View style={styles.imageContainer}>
         <Image
           source={require('../assets/telas/imagem1.png')}
@@ -19,9 +31,9 @@ export default function Index() {
         <Text style={styles.title}>Entrar</Text>
         <Text style={styles.subtitle}>Acesse sua conta com e-mail e senha.</Text>
         <View style={styles.form}>
-          <Input placeholder="Digite seu e-mail"/>
-          <Input placeholder="Digite sua senha" secureTextEntry={true} />
-          <Button label="Entrar" />
+          <Input placeholder="Digite seu e-mail" onChangeText={(text) => setEmail(text)} />
+          <Input placeholder="Digite sua senha" onChangeText={(text) => setPassword(text)} secureTextEntry={true} />
+          <Button label="Entrar" onPress={handleSignIn} />
         </View>
         <Text style={styles.footerText}>
           Não tem uma conta?
@@ -43,7 +55,7 @@ const styles = StyleSheet.create({
     padding: 32,
   },
   scrollView: { // Estilo para o ScrollView em si
-    flex: 1, // Permite que o ScrollView ocupe todo o espaço disponível
+    flexGrow: 1, // Permite que o ScrollView ocupe todo o espaço disponível
   },
 
   contentCenter: { // Estilo para o conteúdo *dentro* do ScrollView
